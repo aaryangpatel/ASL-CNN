@@ -1,0 +1,26 @@
+import numpy as np
+
+
+class Network:
+    def __init__(self, network, loss):
+        self.network = network
+        self.loss = loss
+
+    def predict(self, network, input):
+        output = input
+        for layer in network:
+            output = layer.forward(input)
+
+        return output
+
+    def train(self, x_train, y_train, epochs=50, learning_rate=0.01):
+        for epoch in range(epochs):
+            error = 0
+            for i in range(x_train.shape[0]):
+                output = self.predict(x_train[i])
+
+                error += self.loss.forward(y_train[i], output)
+
+                grad = self.loss.backward(y_train[i], output)
+                for layer in reversed(self.network):
+                    grad = layer.reverse(grad, learning_rate)
