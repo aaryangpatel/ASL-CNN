@@ -6,10 +6,10 @@ class Network:
         self.network = network
         self.loss = loss
 
-    def predict(self, network, input):
+    def predict(self, input):
         output = input
-        for layer in network:
-            output = layer.forward(input)
+        for layer in self.network:
+            output = layer.forward(output)
 
         return output
 
@@ -23,4 +23,4 @@ class Network:
 
                 grad = self.loss.backward(y_train[i], output)
                 for layer in reversed(self.network):
-                    grad = layer.reverse(grad, learning_rate)
+                    grad = layer.backward(grad, learning_rate)
