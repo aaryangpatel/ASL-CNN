@@ -14,7 +14,7 @@ class Convolution:
         self.kernel_shape = (output_depth, input_depth, kernel_size, kernel_size)
 
         self.kernels = np.random.randn(*self.kernel_shape)
-        self.biases = np.random.randn(*self.output_shape)
+        self.biases = np.zeros(self.output_shape)
 
         self.input = None
         self.output = None
@@ -36,9 +36,10 @@ class Convolution:
         for neuron in range(self.output_depth):
             for channel in range(self.input_depth):
                 kernel_grad[neuron, channel] += signal.correlate2d(self.input[channel], output_grad[neuron],
-                                                                  "valid")
+                                                                   "valid")
                 input_grad[channel] += signal.convolve2d(output_grad[neuron], self.kernels[neuron, channel], "full")
 
         self.kernels -= learning_rate * kernel_grad
         self.biases -= learning_rate * output_grad
+
         return input_grad
