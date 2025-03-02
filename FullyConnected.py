@@ -7,23 +7,21 @@ class FullyConnected:
         self.output_size = output_size
         
         self.weights = np.random.rand(self.input_size, self.output_size)
-        self.biases = np.random.rand(self.output_size)
-        
-        self.d_weights = None
+        self.biases = np.zeros(self.output_size)
 
         self.input = None
         self.output = None
         
     def forward(self, input):
         self.input = input
-        self.output += np.dot(self.input, self.weights) + self.biases
+        self.output = np.dot(self.input, self.weights) + self.biases
         return self.output
-           
+
     def backward(self, output_grad, learning_rate):
-        weights_gradient = np.dot(output_grad, self.input.T)
-        input_gradient = np.dot(self.weights.T, output_grad)
-        
-        self.weights -= learning_rate * weights_gradient
+        weights_grad = np.dot(self.input.reshape(-1, 1), output_grad.reshape(1, -1))
+        input_grad = np.dot(output_grad, self.weights.T).reshape(self.input.shape)
+
+        self.weights -= learning_rate * weights_grad
         self.biases -= learning_rate * output_grad
 
-        return input_gradient
+        return input_grad
