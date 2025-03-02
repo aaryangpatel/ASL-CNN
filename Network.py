@@ -13,7 +13,7 @@ class Network:
 
         return output
 
-    def train(self, x_train, y_train, epochs=50, learning_rate=0.01):
+    def train(self, x_train, y_train, epochs, learning_rate):
         for epoch in range(epochs):
             error = 0
             for i in range(x_train.shape[0]):
