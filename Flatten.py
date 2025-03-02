@@ -9,5 +9,5 @@ class Flatten:
         self.input_shape = input.shape
         return input.flatten()
 
-    def backward(self, input, learning_rate):
-        return input.reshape(self.input_shape)
+    def backward(self, output_grad, learning_rate):
+        return output_grad.reshape(self.input_shape)
