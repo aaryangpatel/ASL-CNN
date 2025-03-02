@@ -35,8 +35,7 @@ class Convolution:
 
         for neuron in range(self.output_depth):
             for channel in range(self.input_depth):
-                kernel_grad[neuron, channel] += signal.correlate2d(self.input[channel], output_grad[neuron],
-                                                                   "valid")
+                kernel_grad[neuron, channel] += signal.correlate2d(self.input[channel], output_grad[neuron], "valid")
                 input_grad[channel] += signal.convolve2d(output_grad[neuron], self.kernels[neuron, channel], "full")
 
         self.kernels -= learning_rate * kernel_grad
