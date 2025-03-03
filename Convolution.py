@@ -3,6 +3,7 @@ from scipy import signal
 
 
 class Convolution:
+    """This class implements the convolutional stage of the CNN which emphasizes the image's central features."""
     def __init__(self, input_shape, output_depth, kernel_size):
         self.input_shape = input_shape
         self.output_depth = output_depth
@@ -13,7 +14,8 @@ class Convolution:
         self.output_shape = (output_depth, input_height - kernel_size + 1, input_width - kernel_size + 1)
         self.kernel_shape = (output_depth, input_depth, kernel_size, kernel_size)
 
-        self.kernels = np.random.randn(*self.kernel_shape)
+        # Uses the Xavier method of initializing weights with a uniform distribution
+        self.kernels = np.random.randn(*self.kernel_shape) * np.sqrt(1 / (input_depth * kernel_size * kernel_size))
         self.biases = np.zeros(self.output_shape)
 
         self.input = None
