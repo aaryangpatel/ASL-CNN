@@ -6,6 +6,7 @@ class CrossEntropyLossFunction:
 
     """Defines the loss function which can be used for analysis and evaluation of the model."""
     def forward(self, y_true, y_pred):
+        # Add a epsilon constant to avoid log(0) error
         return -np.sum(y_true * np.log(y_pred + 1e-10))
 
     """Defines the back propagation of the loss function which initiates the model's training process."""
