@@ -22,7 +22,7 @@ class Network:
     def train(self, x_train, y_train, epochs, learning_rate):
         # Iterate through each epoch
         for epoch in range(epochs):
-            print("On epoch", epoch)
+
             # Iterate through each training sample
             for i in range(x_train.shape[0]):
                 output = self.predict(x_train[i])
