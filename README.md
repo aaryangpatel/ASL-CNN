@@ -61,6 +61,7 @@ of the image.
 Since our model does not utilize any multi-threading or GPU, the time to train each model can get quite
 lengthy as shown above. Due to this, we have saved the final trained model for each variation in a pickle
 file which can be loaded and used to predict on the images.
+
 The model's creation and usage is in the ASLModel.ipynb file. The model can be retrained and tested
 from this file. Finally, be sure to change the model_path, where your pickle file, storing your model, will
 be saved/retreived from.
