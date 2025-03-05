@@ -41,10 +41,17 @@ In this project, we were able to create a model with an accuracy in the high 80s
 we tested possible optimizations of the model by training with different image shapes and the number of
 epochs. The below chart explains our findings:
 
+Model 1:
+* Image Shape: 28x28
+* Epochs: 20
+* Accuracy: 88%
+* Time: 30 minutes
 
-Image Shape  | Epochs   | ∼Accuracy | ∼Time
-28x28        |  20      |  88%      |  30 minutes
-64x64        |  20      |  93%      |  3 hours
+Model 2:
+* Image Shape: 64x64
+* Epochs: 20
+* Accuracy: 93%
+* Time: 3 hours
 
 We predict that further optimizations may include increasing the number of epochs and the dimensionality
 of the image.
