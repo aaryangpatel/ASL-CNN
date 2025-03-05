@@ -3,6 +3,7 @@ import numpy as np
 
 class FullyConnected:
     """This class implements the final major part of a CNN, the Fully Connected Layer or Dense Layer."""
+
     def __init__(self, input_size, output_size):
         self.input_size = input_size
         self.output_size = output_size
@@ -23,7 +24,9 @@ class FullyConnected:
     """Computes the gradients for the weights, biases, and input to update the layer's properties and provide the 
     input for the next layer in back propagation."""
     def backward(self, output_grad, learning_rate):
+        # Weights gradient from the dot product of flattened input and output gradient
         weights_grad = np.dot(self.input.reshape(-1, 1), output_grad.reshape(1, -1))
+        # Input gradient from the dot product of the output gradient and transposed weights reshaped into the layer's input shape
         input_grad = np.dot(output_grad, self.weights.T).reshape(self.input.shape)
 
         # Update the weights and biases using the gradients and learning rate
